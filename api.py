@@ -4,6 +4,8 @@ import requests
 from fastapi import FastAPI, HTTPException, Header
 from pydantic import BaseModel
 from main import load_pdf_text, split_text, store_in_chroma, answer_with_rag
+from fastapi.responses import JSONResponse
+import traceback
 
 app = FastAPI()
 
@@ -31,10 +33,6 @@ def download_pdf(url):
     temp.close()
     print(temp.name)
     return temp.name
-
-
-from fastapi.responses import JSONResponse
-import traceback
 
 
 @app.post("/hackrx/run", response_model=HackRxResponse)
